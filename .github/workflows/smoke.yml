@@ -1,0 +1,8 @@
+name: smoke
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  smoke:
+    uses: bradfeld/hugo-common/.github/workflows/smoke.yml@main

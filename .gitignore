@@ -1,0 +1,23 @@
+# Hugo build output
+public/
+resources/
+.hugo_build.lock
+
+# Dependencies
+node_modules/
+
+# Env (never commit secrets)
+.env
+.env*.local
+
+# Vercel
+.vercel
+
+# Claude Code local state
+.claude/
+.claude-session/
+.claude-draft*
+.claude-ticket
+
+# macOS
+.DS_Store

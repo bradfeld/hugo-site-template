@@ -1,0 +1,3 @@
+[submodule "themes/hugo-common"]
+	path = themes/hugo-common
+	url = https://github.com/bradfeld/hugo-common.git

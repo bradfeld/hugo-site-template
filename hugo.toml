@@ -1,0 +1,14 @@
+baseURL = "https://example.com/"
+languageCode = "en-us"
+title = "New Hugo Site"
+
+# Inherit the Feld network's shared infra partials (preview-noindex, etc.)
+# from the hugo-common submodule. Layer your own design theme BEFORE it if you
+# have one: theme = ["your-theme", "hugo-common"].
+theme = ["hugo-common"]
+
+[params]
+  # Set this to your production domain. Any deploy whose baseURL is NOT this host
+  # (i.e. Vercel previews) gets <meta robots noindex> via hugo-common's
+  # preview-noindex partial. Leave it and previews stay indexable.
+  productionHost = "example.com"

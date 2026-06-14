@@ -1,0 +1,6 @@
+{
+  "framework": "hugo",
+  "installCommand": "npm install",
+  "buildCommand": "if [ \"$VERCEL_ENV\" = production ]; then node_modules/.bin/hugo --gc --minify -b \"https://$VERCEL_PROJECT_PRODUCTION_URL/\"; else node_modules/.bin/hugo --gc --minify -b \"https://$VERCEL_URL/\"; fi",
+  "outputDirectory": "public"
+}
