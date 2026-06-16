@@ -3,6 +3,6 @@
   "private": true,
   "description": "Scaffold for a Feld Hugo-on-Vercel site (Hugo pinned in-repo via hugo-extended; see github.com/bradfeld/hugo-common)",
   "devDependencies": {
-    "hugo-extended": "0.163.1"
+    "hugo-extended": "0.163.2"
   }
 }
