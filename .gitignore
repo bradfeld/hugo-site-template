@@ -18,6 +18,7 @@ node_modules/
 .claude-session/
 .claude-draft*
 .claude-ticket
+.playwright-mcp/
 
 # macOS
 .DS_Store
