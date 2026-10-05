@@ -41,3 +41,7 @@ This template is npm + pure-static. If your site needs Vercel serverless functio
 `pnpm.onlyBuiltDependencies: ["hugo-extended"]` to `package.json` — switching the
 package manager mid-flight breaks Vercel's function dependency resolution. See the
 Gotchas section of the [hugo-common README](https://github.com/bradfeld/hugo-common#gotchas-learned-the-hard-way).
+
+## Merging
+
+Pull requests into `main` merge only after the `smoke` check passes.
