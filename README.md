@@ -27,7 +27,7 @@ ready-to-clone starting point.
 1. **Use this template** on GitHub (or `gh repo create <name> --template bradfeld/hugo-site-template`).
 2. Clone with submodules: `git clone --recurse-submodules <url>` (or `git submodule update --init` after a plain clone).
 3. `npm install` — provisions the pinned Hugo to `node_modules/.bin/hugo`.
-4. Set `baseURL`, `title`, and `params.productionHost` in `hugo.toml` to your real domain.
+4. Set `baseURL`, `title`, and `params.productionHost` in `hugo.toml` to your real domain. Production builds from that `baseURL` (`vercel.json`), never from `$VERCEL_PROJECT_PRODUCTION_URL`: with more than one domain Vercel may pick another host, and `preview-noindex` would then mark the live site noindex.
 5. Add your design (drop in a theme as `theme = ["your-theme", "hugo-common"]`, or build out `layouts/`).
 6. Create the Vercel project, point it at the repo. The `vercel.json` build command needs no Hugo env var.
 7. Give the **`feld-hugo-renovate`** GitHub App access to the new repo. It is installed on selected repositories only, not *All repositories*, so nothing is automatic: GitHub → Settings → Applications → Installed GitHub Apps → feld-hugo-renovate → Configure → Repository access.
