@@ -30,9 +30,34 @@ ready-to-clone starting point.
 4. Set `baseURL`, `title`, and `params.productionHost` in `hugo.toml` to your real domain.
 5. Add your design (drop in a theme as `theme = ["your-theme", "hugo-common"]`, or build out `layouts/`).
 6. Create the Vercel project, point it at the repo. The `vercel.json` build command needs no Hugo env var.
-7. Confirm the **Renovate** GitHub App covers the new repo (it does automatically if installed on *All repositories*).
+7. Give the **`feld-hugo-renovate`** GitHub App access to the new repo. It is installed on selected repositories only, not *All repositories*, so nothing is automatic: GitHub → Settings → Applications → Installed GitHub Apps → feld-hugo-renovate → Configure → Repository access.
+8. Only after step 7, register the site in `hugo-common` (the token is minted for every listed repo, so a repo the app cannot see risks failing the mint for every site in the fleet, unobserved): add it to **both** lists in `.github/workflows/renovate.yml` (`repositories:` and `RENOVATE_REPOSITORIES`, the latter with the `bradfeld/` prefix) and to `SITES` in `.github/workflows/fleet-alerts.yml`. The three lists must name the same sites, and a consumer build cannot check them, so this step is the control.
+9. Enable Dependabot alerts: `gh api -X PUT repos/bradfeld/<repo>/vulnerability-alerts`, then verify a `204` with `gh api -i repos/bradfeld/<repo>/vulnerability-alerts`. The fleet-alerts watch goes red for a site it cannot read.
 
 That's it — pinned, auto-updating, and smoke-verified from the first commit.
+
+## Browser editor
+
+`hugo-common` ships a `sveltia-cms` page layout that loads [Sveltia CMS](https://github.com/sveltia/sveltia-cms) (a pinned, integrity-checked version), so a site owner can edit content in a browser and commit to GitHub. This template mounts an example at `/editor-example/`.
+
+To mount one on your site:
+
+1. Add one content file whose front matter selects the layout and keeps the page unlisted (copy `content/editor-example.md`):
+   ```yaml
+   ---
+   title: "Editor"
+   layout: sveltia-cms
+   url: /<your-path>/
+   build:
+     list: never
+   sitemap:
+     disable: true
+   outputs: [html]
+   ---
+   ```
+2. Add `static/<your-path>/config.yml` (copy `static/editor-example/config.yml`, set `backend.repo` to your repository, and define your collections).
+
+Each real site must choose its own unguessable `<your-path>` and never ship `editor-example` to production. The address only keeps the page out of casual view, so it is not the protection: only people with GitHub write access to the repository can save anything. The shared `smoke` check fails the build if an editor page loses its integrity hash or `noindex` tag, or shows up in the sitemap or RSS feed.
 
 ## Sites with serverless `/api` functions
 
