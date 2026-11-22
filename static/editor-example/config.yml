@@ -1,0 +1,20 @@
+# Example Sveltia CMS config. Copy to static/<your-secret-path>/config.yml and
+# replace OWNER/REPO with the GitHub repository this site's content lives in.
+backend:
+  name: github
+  repo: OWNER/REPO
+  branch: main
+
+media_folder: static/images
+public_folder: /images
+
+collections:
+  - name: pages
+    label: Pages
+    folder: content
+    create: true
+    extension: md
+    format: yaml-frontmatter
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: body, label: Body, widget: markdown }

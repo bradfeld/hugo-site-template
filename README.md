@@ -34,6 +34,29 @@ ready-to-clone starting point.
 
 That's it — pinned, auto-updating, and smoke-verified from the first commit.
 
+## Browser editor
+
+`hugo-common` ships a `sveltia-cms` page layout that loads [Sveltia CMS](https://github.com/sveltia/sveltia-cms) (a pinned, integrity-checked version), so a site owner can edit content in a browser and commit to GitHub. This template mounts an example at `/editor-example/`.
+
+To mount one on your site:
+
+1. Add one content file whose front matter selects the layout and keeps the page unlisted (copy `content/editor-example.md`):
+   ```yaml
+   ---
+   title: "Editor"
+   layout: sveltia-cms
+   url: /<your-path>/
+   build:
+     list: never
+   sitemap:
+     disable: true
+   outputs: [html]
+   ---
+   ```
+2. Add `static/<your-path>/config.yml` (copy `static/editor-example/config.yml`, set `backend.repo` to your repository, and define your collections).
+
+Each real site must choose its own unguessable `<your-path>` and never ship `editor-example` to production. The address only keeps the page out of casual view, so it is not the protection: only people with GitHub write access to the repository can save anything. The shared `smoke` check fails the build if an editor page loses its integrity hash or `noindex` tag, or shows up in the sitemap or RSS feed.
+
 ## Sites with serverless `/api` functions
 
 This template is npm + pure-static. If your site needs Vercel serverless functions
