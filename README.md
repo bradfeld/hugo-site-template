@@ -30,7 +30,9 @@ ready-to-clone starting point.
 4. Set `baseURL`, `title`, and `params.productionHost` in `hugo.toml` to your real domain.
 5. Add your design (drop in a theme as `theme = ["your-theme", "hugo-common"]`, or build out `layouts/`).
 6. Create the Vercel project, point it at the repo. The `vercel.json` build command needs no Hugo env var.
-7. Confirm the **Renovate** GitHub App covers the new repo (it does automatically if installed on *All repositories*).
+7. Give the **`feld-hugo-renovate`** GitHub App access to the new repo. It is installed on selected repositories only, not *All repositories*, so nothing is automatic: GitHub → Settings → Applications → Installed GitHub Apps → feld-hugo-renovate → Configure → Repository access.
+8. Only after step 7, register the site in `hugo-common` (the token is minted for every listed repo, so a repo the app cannot see risks failing the mint for every site in the fleet, unobserved): add it to **both** lists in `.github/workflows/renovate.yml` (`repositories:` and `RENOVATE_REPOSITORIES`, the latter with the `bradfeld/` prefix) and to `SITES` in `.github/workflows/fleet-alerts.yml`. The three lists must name the same sites, and a consumer build cannot check them, so this step is the control.
+9. Enable Dependabot alerts: `gh api -X PUT repos/bradfeld/<repo>/vulnerability-alerts`, then verify a `204` with `gh api -i repos/bradfeld/<repo>/vulnerability-alerts`. The fleet-alerts watch goes red for a site it cannot read.
 
 That's it — pinned, auto-updating, and smoke-verified from the first commit.
 
