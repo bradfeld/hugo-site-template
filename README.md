@@ -13,7 +13,7 @@ ready-to-clone starting point.
 
 | File | Role |
 |---|---|
-| `package.json` | Pins Hugo in-repo via `hugo-extended@0.163.0` (Renovate watches this) |
+| `package.json` | Pins Hugo in-repo via `hugo-extended@0.169.0` (Renovate watches this; the hugo-common preset holds it below 0.170.0, which ships no macOS extended build) |
 | `vercel.json` | Builds with `node_modules/.bin/hugo` and an env-aware `-b` (correct preview URLs) |
 | `renovate.json` | Extends the shared `hugo-common` preset → smoke-gated automerge of Hugo bumps |
 | `.github/workflows/smoke.yml` | Calls the reusable `hugo-common` smoke gate (asserts the site RENDERS, not just builds) |
